@@ -1,0 +1,63 @@
+---
+title: "shaheen-test"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+This is very *important* lesson on the R-markdown
+
+## Project Objectives
+
+1. Selection of site
+2. Instrumentation setup
+3. Taking measurements
+
+
+
+## 
+```{r}
+x <-  3*4
+x
+```
+
+
+```{r}
+weight_kg <- 55
+weight_lb <- weight_kg*2.2
+weight_lb
+
+```
+```{r}
+t = seq(0, 10, 0.1)
+y= sin(t)
+plot(t,y,type ="l")
+```
+
+
+```{r, echo = FALSE}
+
+```
+
+```{r}
+library(readr)
+```
+
+## Introduction
+* read in the data
+```{r}
+bg_chem <- read_csv("BGchem2008data.csv")
+```
+
+## Analysis
+
+```{r, echo= FALSE}
+nitrate <- mean(bg_chem$NO3)
+nitrite <- mean(bg_chem$NO2)
+amm <- mean(bg_chem$NH4)
+phos <- mean(bg_chem$P)
+```
+
