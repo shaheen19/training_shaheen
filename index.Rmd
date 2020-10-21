@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Analysis
 Take a look at my awesome webpage.
 
-[Data Tidying](tidy_lesson.html)
+[R Markdown](rmarkdown_lesson.html)
 
 
 ## R Markdown
