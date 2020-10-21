@@ -9,7 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ## Analysis
-Take a look at my awesome work.
+Take a look at my awesome webpage.
+
 [Data Tidying](tidy_lesson.html)
 
 
