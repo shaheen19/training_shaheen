@@ -103,6 +103,9 @@ mean_by_region <- catch_long %>%
 mean_by_region
 
 ```
+```{r}
+
+```
 
 
 ```{r}
@@ -111,6 +114,8 @@ region_defs <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/df35
 ```
 
 ```{r}
+catch_joined <- left_join(catch_long, region_defs, by = c("Region"= "code"))
+catch_joined
 ```
 
 
