@@ -8,6 +8,10 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+## Analysis
+Take a look at my awesome work.
+[Data Tidying](tidy_lesson.html)
+
 
 ## R Markdown
 
