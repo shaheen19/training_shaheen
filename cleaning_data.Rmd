@@ -1,0 +1,119 @@
+---
+title: "cleaning_data"
+author: "shaheen"
+date: "10/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+library(tidyr)
+library(readr)
+```
+
+```{r}
+# instead of normal read.csv
+catch_original <- read_csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/df35b.302.1")
+```
+```{r}
+# ctr+shift+m for pipe
+#df_cleaned <- df %>% filter()
+# or you can use
+#catch_data <- catch_original %>% 
+ # select(-All, -notesregioncode)
+catch_data <- catch_original %>% 
+  select(Region, Year,Chinook, Sockeye, Coho, Pink, Chum)
+catch_data
+  
+```
+```{r}
+summary(catch_data)
+```
+```{r}
+catch_clean <- catch_data %>% 
+  mutate(Chinook = as.numeric(Chinook))
+
+```
+```{r}
+#i <- which(is.na(catch_clean$Chinook))
+# This line of code shows the non NA values. However it is good to assign it a variable as in line above.
+which(is.na(catch_clean$Chinook))
+```
+```{r}
+i <- which(is.na(catch_clean$Chinook))
+i
+```
+```{r}
+catch_original[i,]
+```
+```{r}
+# to turn i to one
+catch_clean <- catch_data %>% 
+  mutate(Chinook = ifelse(Chinook == "I", 1, Chinook)) %>% 
+  mutate(Chinook = as.numeric(Chinook))
+catch_clean
+```
+```{r}
+catch_long <- catch_clean %>% 
+  pivot_longer(cols = -c(Region, Year), names_to = "Species", values_to = "catch")
+catch_long
+```
+```{r}
+# To revese the table
+catch_wide <- catch_long %>% 
+  pivot_wider(names_from = "Species", values_from = "catch")
+catch_wide
+```
+
+```{r}
+catch_long <- catch_long %>% 
+  rename(catch_thousands = catch)
+catch_long
+```
+
+
+```{r}
+catch_long <- catch_long %>% 
+  mutate(catch = catch_thousands*1000) %>% 
+  select(-catch_thousands)
+catch_long
+```
+
+```{r}
+mean_by_region <- catch_long %>% 
+  group_by(Region) %>% 
+  summarise(catch_mean = mean(catch))
+mean_by_region
+```
+```{r}
+SSE_catch <- catch_long %>% 
+  filter(Region == "SSE")
+SSE_catch
+```
+
+
+```{r}
+mean_by_region <- catch_long %>% 
+  group_by(Region) %>% 
+  summarise(catch_mean = mean(catch)) %>% 
+  arrange(desc(catch_mean))
+mean_by_region
+
+```
+
+
+```{r}
+region_defs <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/df35b.303.1") %>%
+  select(code, mgmtArea)
+```
+
+```{r}
+```
+
+
+```{r}
+```
+
