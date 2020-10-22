@@ -8,3 +8,141 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r}
+library(roxygen2)
+
+```
+
+
+# Example without using functions
+
+```{r}
+#the first air temps
+airtemps1 <- c(212,30.3, 78, 32) #hey ruby your changed this
+celsius1 <- (airtemps1[1]-32)*5/9 #but didn't change all of these
+celsius2 <- (airtemps1-32)*5/9
+celsius3 <- (airtemps1[3]-32)*5/9
+celsius4 <- (airtemps1-32)*5/9
+
+```
+
+# Create a function
+```{r}
+# line 26-27 are body of function.
+fahr_to_celsius <- function(fahr) {
+  celsius <- (fahr-32)*5/9
+  return(celsius)
+
+}
+```
+
+```{r}
+celsius4 <- fahr_to_celsius(airtemps1[1])
+celsius4
+celsius1 == celsius4
+```
+```{r}
+celsius <- fahr_to_celsius(airtemps1)
+celsius
+
+```
+```{r}
+#second one
+airtemps2 <- c(100.0000000,  -0.9444444,  25.5555556,   0.0000000)
+```
+
+
+```{r}
+#here Ruby - try re-running this again so we have the function in the environment
+# convert celsius to Fahrenheit
+# This function takes scaler of vector values in degree celsius
+# and return values in degree Fahreheit
+# @param celsius the input temperature in degree Celsius
+
+celsius_to_fahr <- function(celsius){
+  fahr <- (celsius*9/5 + 32)
+  return(fahr)
+}
+
+```
+```{r}
+
+#then try this
+fahr <- celsius_to_fahr(airtemps2)
+fahr
+```
+```{r}
+result <- celsius_to_fahr(celsius)
+result == airtemps1 # look at what you have here
+```
+
+
+# Test our function
+
+
+# Document our function
+# Plotting data-linear plot
+
+```{r}
+convert_temps <- function(fahr) {
+  celsius <- (fahr-32)*5/9
+  kelvin <- celsius + 273.15
+  return(list(fahr=fahr, celsius=celsius, kelvin=kelvin))
+}
+
+temps_df <- data.frame(convert_temps(seq(-100,100,10)))
+datatable(temps_df)
+
+```
+
+
+```{r}
+custom_theme <- function(base_size = 9) {
+    ggplot2::theme(
+      axis.ticks       = ggplot2::element_blank(),
+      text             = ggplot2::element_text(family = 'Helvetica', color = 'gray30', size = base_size),
+      plot.title       = ggplot2::element_text(size = ggplot2::rel(1.25), hjust = 0.5, face = 'bold'),
+      panel.background = ggplot2::element_blank(),
+      legend.position  = 'right',
+      panel.border     = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_line(colour = 'grey90', size = .25),
+      legend.key       = ggplot2::element_rect(colour = NA, fill = NA),
+      axis.line        = ggplot2::element_blank()
+      )
+}
+
+ggplot(temps_df, mapping=aes(x=fahr, y=celsius, color=kelvin)) +
+    geom_point() +
+    custom_theme(10)
+
+```
+
+
+```{r}
+scatterplot <- function(df, point_size = 2, font_size=9) {
+  ggplot(df, mapping=aes(x=fahr, y=celsius, color=kelvin)) +
+    geom_point(size=point_size) +
+    scale_color_gradient(low = "blue", high = "red") +
+    custom_theme(font_size)
+}
+```
+
+
+```{r}
+scatterplot(temps_df, point_size=3, font_size = 16)
+```
+```{r}
+
+```
+
+
+```{r}
+```
+
+
+```{r}
+}
+
+```
+
