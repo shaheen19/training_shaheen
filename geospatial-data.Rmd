@@ -75,7 +75,7 @@ head(pop_4326)
 
 
 ```{r}
-pop_joined <- st_join(pop_4326, ak_regions_3338, join = st_within)
+#pop_joined <- st_join(pop_4326, ak_regions_3338, join = st_within)
 ```
 ```{r}
 ## The above issue can be resolved by matching coordinates.
